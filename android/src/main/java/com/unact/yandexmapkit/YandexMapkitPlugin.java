@@ -19,6 +19,8 @@ public class YandexMapkitPlugin implements FlutterPlugin, ActivityAware {
   private static final String SEARCH_CHANNEL_ID   = "yandex_mapkit/yandex_search";
   private static final String SUGGEST_CHANNEL_ID  = "yandex_mapkit/yandex_suggest";
   private static final String DRIVING_CHANNEL_ID  = "yandex_mapkit/yandex_driving";
+
+  private static final String MASSTRANSIT_CHANNEL_ID  = "yandex_mapkit/yandex_masstransit";
   private static final String BICYCLE_CHANNEL_ID  = "yandex_mapkit/yandex_bicycle";
 
   @Nullable private Lifecycle lifecycle;
@@ -26,6 +28,8 @@ public class YandexMapkitPlugin implements FlutterPlugin, ActivityAware {
   @Nullable private MethodChannel searchMethodChannel;
   @Nullable private MethodChannel suggestMethodChannel;
   @Nullable private MethodChannel drivingMethodChannel;
+
+  @Nullable private MethodChannel massTransitMethodChannel;
   @Nullable private MethodChannel bicycleMethodChannel;
 
   @Override
@@ -56,6 +60,10 @@ public class YandexMapkitPlugin implements FlutterPlugin, ActivityAware {
     YandexDriving yandexDriving = new YandexDriving(context, messenger);
     drivingMethodChannel.setMethodCallHandler(yandexDriving);
 
+    massTransitMethodChannel = new MethodChannel(messenger, MASSTRANSIT_CHANNEL_ID);
+    YandexMasstransit yandexMasstransit = new YandexMasstransit(context, messenger);
+    massTransitMethodChannel.setMethodCallHandler(yandexMasstransit);
+
     bicycleMethodChannel = new MethodChannel(messenger, BICYCLE_CHANNEL_ID);
     YandexBicycle yandexBicycle = new YandexBicycle(context, messenger);
     bicycleMethodChannel.setMethodCallHandler(yandexBicycle);
@@ -71,6 +79,9 @@ public class YandexMapkitPlugin implements FlutterPlugin, ActivityAware {
 
     drivingMethodChannel.setMethodCallHandler(null);
     drivingMethodChannel = null;
+
+    massTransitMethodChannel.setMethodCallHandler(null);
+    massTransitMethodChannel = null;
 
     bicycleMethodChannel.setMethodCallHandler(null);
     bicycleMethodChannel = null;
