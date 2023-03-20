@@ -16,10 +16,10 @@ class MasstransitSession {
 
   /// Retries current session
   ///
-  /// After [BicycleSession.close] has been called, all subsequent calls will return a [BicycleSessionException]
+  /// After [MasstransitSession.close] has been called, all subsequent calls will return a [MasstransitSessionException]
   Future<void> retry() async {
     if (_isClosed) {
-      throw BicycleSessionException._('Session is closed');
+      throw MasstransitSessionException._('Session is closed');
     }
 
     await _methodChannel.invokeMethod<void>('retry');
@@ -27,10 +27,10 @@ class MasstransitSession {
 
   /// Cancels current session
   ///
-  /// After [BicycleSession.close] has been called, all subsequent calls will return a [BicycleSessionException]
+  /// After [MasstransitSession.close] has been called, all subsequent calls will return a [MasstransitSessionException]
   Future<void> cancel() async {
     if (_isClosed) {
-      throw BicycleSessionException._('Session is closed');
+      throw MasstransitSessionException._('Session is closed');
     }
 
     await _methodChannel.invokeMethod<void>('cancel');
@@ -38,10 +38,10 @@ class MasstransitSession {
 
   /// Closes current session
   ///
-  /// After first call, all subsequent calls will return a [BicycleSessionException]
+  /// After first call, all subsequent calls will return a [MasstransitSessionException]
   Future<void> close() async {
     if (_isClosed) {
-      throw BicycleSessionException._('Session is closed');
+      throw MasstransitSessionException._('Session is closed');
     }
 
     await _methodChannel.invokeMethod<void>('close');
@@ -58,7 +58,7 @@ class MasstransitSessionException extends SessionException {
 /// If any error has occured then [routes] will be empty, otherwise [error] will be empty
 class MasstransitSessionResult {
   /// Calculated routes
-  final List<BicycleRoute>? routes;
+  final List<MasstransitRoute>? routes;
 
   /// Error message
   final String? error;
