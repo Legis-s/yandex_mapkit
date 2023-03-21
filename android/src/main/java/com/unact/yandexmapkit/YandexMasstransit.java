@@ -8,6 +8,7 @@ import com.yandex.mapkit.RequestPoint;
 import com.yandex.mapkit.transport.TransportFactory;
 import com.yandex.mapkit.transport.masstransit.MasstransitRouter;
 import com.yandex.mapkit.transport.masstransit.Session;
+import com.yandex.mapkit.transport.masstransit.TransitOptions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,7 +57,7 @@ public class YandexMasstransit implements MethodCallHandler {
 
         Session session = masstransitRouter.requestRoutes(
                 points,
-                null,
+                new TransitOptions(),
                 new YandexMasstransitListener(result)
         );
 
