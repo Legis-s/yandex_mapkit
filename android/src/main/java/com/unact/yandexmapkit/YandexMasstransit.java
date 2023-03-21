@@ -6,8 +6,10 @@ import androidx.annotation.NonNull;
 
 import com.yandex.mapkit.RequestPoint;
 import com.yandex.mapkit.transport.TransportFactory;
+import com.yandex.mapkit.transport.masstransit.FilterVehicleTypes;
 import com.yandex.mapkit.transport.masstransit.MasstransitRouter;
 import com.yandex.mapkit.transport.masstransit.Session;
+import com.yandex.mapkit.transport.masstransit.TimeOptions;
 import com.yandex.mapkit.transport.masstransit.TransitOptions;
 
 import java.util.ArrayList;
@@ -57,7 +59,7 @@ public class YandexMasstransit implements MethodCallHandler {
 
         Session session = masstransitRouter.requestRoutes(
                 points,
-                new TransitOptions(),
+                new TransitOptions(FilterVehicleTypes.NONE.value, new TimeOptions()),
                 new YandexMasstransitListener(result)
         );
 
